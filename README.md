@@ -1,27 +1,75 @@
-# AngularEffectsApp
+# Angular Effects Implementation
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
+## Getting Started
 
-## Development server
+### Installing
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```
+npm i angular-effects
+```
 
-## Code scaffolding
+###Example (TypeScript)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```ts
 
-## Build
+// app.component.effect.ts
+import { Injectable } from '@angular/core';
+import { MyEffect } from 'dist/angular-effects';
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+@Injectable()
+export class AppCompEffect {
+  constructor () {}
 
-## Running unit tests
+  @MyEffect('NAME')
+  public onNameChange(name: string): void {
+    console.log('nameChanged', name);
+  }
+}
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+// app.module.ts
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
-## Further help
+import { AppComponent } from './app.component';
+import { AppCompEffect } from './app.component.effect';
+import { EffectModule } from 'dist/angular-effects';
+import { TestEffect } from './test.effect';
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    // adding your effects to EffectModule
+    EffectModule.forRoot([AppCompEffect, TestEffect])
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+// app.component.ts
+
+import { Component } from '@angular/core';
+import { Dispatch } from 'dist/angular-effects';
+
+@Component({
+  selector: 'app-root',
+  template: `<input type="text" [(ngModel)]="name"  (ngModelChange)="onChange(name)">`,
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  title = 'angular-effects-app';
+
+  constructor(private dispatch: Dispatch) {}
+
+  public onChange(name: string): void {
+    this.dispatch.dispatch({ type: 'NAME', payload: name });
+  }
+
+```
