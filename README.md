@@ -14,7 +14,7 @@ npm i angular-effects
 
 // app.component.effect.ts
 import { Injectable } from '@angular/core';
-import { MyEffect } from 'dist/angular-effects';
+import { MyEffect } from 'angular-effects';
 
 @Injectable()
 export class AppCompEffect {
@@ -35,7 +35,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppCompEffect } from './app.component.effect';
-import { EffectModule } from 'dist/angular-effects';
+import { EffectModule } from 'angular-effects';
 import { TestEffect } from './test.effect';
 
 @NgModule({
@@ -56,7 +56,7 @@ export class AppModule { }
 // app.component.ts
 
 import { Component } from '@angular/core';
-import { Dispatch } from 'dist/angular-effects';
+import { Dispatch } from 'angular-effects';
 
 @Component({
   selector: 'app-root',
