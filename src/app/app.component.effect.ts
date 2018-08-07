@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MyEffect } from 'dist/angular-effects';
+import { MyEffect } from 'angular-effects';
 
 @Injectable()
 export class AppCompEffect {

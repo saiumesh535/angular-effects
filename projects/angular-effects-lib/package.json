@@ -1,6 +1,21 @@
 {
   "name": "angular-effects",
-  "version": "0.0.1",
+  "version": "0.0.3",
+  "description": "Angular Effects",
+  "bugs": {
+    "url": "https://github.com/saiumesh535/angular-effects/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/saiumesh535/angular-effects"
+  },
+  "homepage": "https://github.com/saiumesh535/angular-effects",
+  "keywords": [
+    "Effects",
+    "Angular Effects"
+  ],
+  "author": "sai umesh",
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "6.0.0-rc.0 || 6.0.0",
     "@angular/core": "6.0.0-rc.0 || 6.0.0"
