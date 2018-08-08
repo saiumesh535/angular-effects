@@ -14,13 +14,13 @@ npm i angular-effects
 
 // app.component.effect.ts
 import { Injectable } from '@angular/core';
-import { MyEffect } from 'angular-effects';
+import { Effect } from 'angular-effects';
 
 @Injectable()
 export class AppCompEffect {
   constructor () {}
 
-  @MyEffect('NAME')
+  @Effect('NAME')
   public onNameChange(name: string): void {
     console.log('nameChanged', name);
   }
@@ -35,8 +35,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppCompEffect } from './app.component.effect';
-import { EffectModule } from 'angular-effects';
-import { TestEffect } from './test.effect';
+import { EffectsModule } from 'angular-effects';
 
 @NgModule({
   declarations: [
@@ -46,7 +45,7 @@ import { TestEffect } from './test.effect';
     BrowserModule,
     FormsModule,
     // adding your effects to EffectModule
-    EffectModule.forRoot([AppCompEffect, TestEffect])
+    EffectsModule.forRoot([AppCompEffect])
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -66,10 +65,10 @@ import { Dispatch } from 'angular-effects';
 export class AppComponent {
   title = 'angular-effects-app';
 
-  constructor(private dispatch: Dispatch) {}
+  constructor(private ae: Dispatch) {}
 
   public onChange(name: string): void {
-    this.dispatch.dispatch({ type: 'NAME', payload: name });
+    this.ae.dispatch({ type: 'NAME', payload: name });
   }
 
 ```
