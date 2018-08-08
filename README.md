@@ -43,11 +43,10 @@ export class AppCompEffect {
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { EffectsModule } from 'angular-effects';
 
 import { AppComponent } from './app.component';
 import { AppCompEffect } from './app.component.effect';
-import { EffectModule } from 'angular-effects';
-import { TestEffect } from './test.effect';
 
 @NgModule({
   declarations: [
@@ -56,8 +55,8 @@ import { TestEffect } from './test.effect';
   imports: [
     BrowserModule,
     FormsModule,
-    // adding your effects to EffectModule
-    EffectModule.forRoot([AppCompEffect, TestEffect])
+    // adding your effects to EffectsModule
+    EffectsModule.forRoot([AppCompEffect])
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -77,7 +76,7 @@ import { Dispatch } from 'angular-effects';
 export class AppComponent {
   title = 'angular-effects-app';
 
-  constructor(private dispatch: Dispatch) {}
+  constructor(private ae: Dispatch) {}
 
   public onChange(name: string): void {
      this.ae.dispatch({ type: 'NAME', payload: 'angularEffects' });
