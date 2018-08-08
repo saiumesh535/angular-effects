@@ -14,17 +14,28 @@ npm i angular-effects
 
 // app.component.effect.ts
 import { Injectable } from '@angular/core';
-import { MyEffect } from 'angular-effects';
+import { Effect, RxEffect } from 'angular-effects';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AppCompEffect {
   constructor () {}
 
-  @MyEffect('NAME')
+  @Effect('NAME')
   public onNameChange(name: string): void {
     console.log('nameChanged', name);
   }
+
+  @RxEffect('NAME')
+  public OnRxName(name: Observable<string>): void {
+    name.pipe(
+      map(data => data.includes('angularEffects') && data)
+    ).subscribe(data => console.log({data}));
+  }
+
 }
+
 
 
 // app.module.ts
@@ -69,7 +80,7 @@ export class AppComponent {
   constructor(private dispatch: Dispatch) {}
 
   public onChange(name: string): void {
-    this.dispatch.dispatch({ type: 'NAME', payload: name });
+     this.ae.dispatch({ type: 'NAME', payload: 'angularEffects' });
   }
 
 ```

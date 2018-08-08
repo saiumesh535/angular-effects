@@ -14,7 +14,9 @@ npm i angular-effects
 
 // app.component.effect.ts
 import { Injectable } from '@angular/core';
-import { Effect } from 'angular-effects';
+import { Effect, RxEffect } from 'angular-effects';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AppCompEffect {
@@ -24,7 +26,16 @@ export class AppCompEffect {
   public onNameChange(name: string): void {
     console.log('nameChanged', name);
   }
+
+  @RxEffect('NAME')
+  public OnRxName(name: Observable<string>): void {
+    name.pipe(
+      map(data => data.includes('angularEffects') && data)
+    ).subscribe(data => console.log({data}));
+  }
+
 }
+
 
 
 // app.module.ts
@@ -35,7 +46,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { AppCompEffect } from './app.component.effect';
-import { EffectsModule } from 'angular-effects';
+import { EffectModule } from 'angular-effects';
+import { TestEffect } from './test.effect';
 
 @NgModule({
   declarations: [
@@ -45,7 +57,7 @@ import { EffectsModule } from 'angular-effects';
     BrowserModule,
     FormsModule,
     // adding your effects to EffectModule
-    EffectsModule.forRoot([AppCompEffect])
+    EffectModule.forRoot([AppCompEffect, TestEffect])
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -65,10 +77,10 @@ import { Dispatch } from 'angular-effects';
 export class AppComponent {
   title = 'angular-effects-app';
 
-  constructor(private ae: Dispatch) {}
+  constructor(private dispatch: Dispatch) {}
 
   public onChange(name: string): void {
-    this.ae.dispatch({ type: 'NAME', payload: name });
+     this.ae.dispatch({ type: 'NAME', payload: 'angularEffects' });
   }
 
 ```
