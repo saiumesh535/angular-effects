@@ -7,10 +7,10 @@ import { Dispatch } from './dispatch';
   exports: [],
   entryComponents: []
 })
-export class EffectModule {
+export class EffectsModule {
   static forRoot(effectsArray): ModuleWithProviders {
     return {
-      ngModule: EffectModule,
+      ngModule: EffectsModule,
       providers: [ effectsArray, Dispatch ]
     };
   }

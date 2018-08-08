@@ -1,23 +1,12 @@
 import { Injectable } from '@angular/core';
 import { IEffect, IDispatch } from './Types';
+import { effects } from './addingEffect';
 
-const effects: IEffect[] = [];
 
 @Injectable()
 export class Dispatch {
 
   constructor() { }
-
-  /**
-   *
-   * @param type string
-   * @param target Object
-   * @param propertyKey string
-   * @param descriptionKey TypedPropertyDescriptor<Function>
-   */
-  public addEffect(type: string, target: Object, propertyKey: string, descriptionKey: TypedPropertyDescriptor<Function>): void {
-    effects.push({ type, target, propertyKey, descriptionKey });
-  }
 
   /**
    *
