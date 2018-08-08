@@ -8,4 +8,5 @@ export interface IEffect {
   target: Object;
   propertyKey: string;
   descriptionKey: TypedPropertyDescriptor<Function>;
+  rxjs?: boolean;
 }

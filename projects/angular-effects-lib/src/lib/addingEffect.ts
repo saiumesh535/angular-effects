@@ -13,8 +13,9 @@ export class AddingEffects {
    * @param propertyKey string
    * @param descriptionKey TypedPropertyDescriptor<Function>
    */
-  public addEffect(type: string, target: Object, propertyKey: string, descriptionKey: TypedPropertyDescriptor<Function>): void {
-    effects.push({ type, target, propertyKey, descriptionKey });
+  public addEffect(type: string, target: Object,
+      propertyKey: string, descriptionKey: TypedPropertyDescriptor<Function>, rxjs: boolean): void {
+    effects.push({ type, target, propertyKey, descriptionKey, rxjs });
   }
 
 }

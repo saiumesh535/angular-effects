@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { of } from 'rxjs';
+
 import { IEffect, IDispatch } from './Types';
 import { effects } from './addingEffect';
 
@@ -16,7 +18,8 @@ export class Dispatch {
     if (effects !== null) {
       effects.forEach((action: IEffect) => {
         if (action.type === data.type) {
-          action.target[action.propertyKey](data.payload);
+          const payLoad = action.rxjs === true ? of(data.payload) : data.payload;
+          action.target[action.propertyKey](payLoad);
         }
       });
     }

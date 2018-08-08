@@ -17,3 +17,13 @@ export const Effect = (type: string) => {
   };
 };
 
+
+/**
+ * @param type string
+ */
+export const RxEffect = (type: string) => {
+  return function (target: Object, propertyKey: string, descriptionKey: TypedPropertyDescriptor<Function>) {
+    effects.addEffect(type, target, propertyKey, descriptionKey, true);
+  };
+};
+
